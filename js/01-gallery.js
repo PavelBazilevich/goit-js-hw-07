@@ -4,7 +4,7 @@ import { galleryItems } from './gallery-items.js';
 
 
 const galleryEl = document.querySelector(".gallery")
-
+const lightbox = document.querySelector(".basicLightbox")
 
 const resizeImage = event => {
       if (event.target.nodeName !== "IMG") {
@@ -21,10 +21,8 @@ const closeModal = event => {
     if (event.key !== 'Escape' && basicLightbox.visible()) {
     return;
     }
-// ПЕРЕВІРКУ ЗРОБИВ ЗАЛИШИЛОСЬ ДОДАТИ ФУНКЦІОНАЛ ЗАКРИТТЯ ПО КНОПЦІ ЕСКЕЙП
-    
-     
-console.log(event)
+  const lightbox = document.querySelector(".basicLightbox")
+  lightbox.classList.remove('basicLightbox--visible')
 }
 
 
