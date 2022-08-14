@@ -1,33 +1,36 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 
-
-
 const galleryEl = document.querySelector(".gallery")
-const lightbox = document.querySelector(".basicLightbox")
+const modal = basicLightbox.create(
+    `<img width="1400" height="900" src=""> `, {
+
+	onShow: modal => {document.addEventListener('keydown', closeModal)},
+
+	onClose: modal => {document.removeEventListener('keydown', closeModal)}
+}
+  );
 
 const resizeImage = event => {
       if (event.target.nodeName !== "IMG") {
     return;
   }
     event.preventDefault()
-  const modal = basicLightbox.create(
-    `<img width="1400" height="900" src="${event.target.dataset.source}"> `
-  ).show();
-    
+  modal.element().querySelector('img').src = event.target.dataset.source;
+  modal.show();
 }
 
-const closeModal = event => {
-    if (event.key !== 'Escape' && basicLightbox.visible()) {
+
+function closeModal(event){
+  if (event.key === 'Escape') {
+      modal.close()
     return;
     }
-  const lightbox = document.querySelector(".basicLightbox")
-  lightbox.classList.remove('basicLightbox--visible')
+  
 }
 
 
 galleryEl.addEventListener('click', resizeImage)
-galleryEl.addEventListener('keydown', closeModal)
 
 const itemGallaryMarkup = createItemGallaryMarkup(galleryItems)
 galleryEl.innerHTML = itemGallaryMarkup;
